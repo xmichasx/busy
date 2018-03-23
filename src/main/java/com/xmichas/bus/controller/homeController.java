@@ -1,5 +1,6 @@
 package com.xmichas.bus.controller;
 
+import com.xmichas.bus.fun.zarzadzanieUser;
 import com.xmichas.bus.model.User;
 import com.xmichas.bus.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,8 @@ public class homeController {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    zarzadzanieUser zarzadzanieUser;
     User userG=null;
 
 
@@ -45,15 +48,17 @@ public class homeController {
     public ModelAndView logowanieFormularz(Model model) {
         User user= new User();
         model.addAttribute("user",user);
-        return new ModelAndView("rejestracja");
+        return new ModelAndView("logowanie");
 
     }
 
     @RequestMapping(value="logowanie", method = RequestMethod.POST)
     public ModelAndView logowanieLog(User user) {
         List<User> listOfUser=userRepository.findAll();
-
-        userG=userRepository.findByLogin(user.getLogin());
+        userG=zarzadzanieUser.zaloguj(user.getLogin(),user.getHaslo(), listOfUser);
+        if(null==userG || !userG.isZalogowany()){
+            return new ModelAndView("redirect:/logowanie");
+        }
         userRepository.save(user);
         return new ModelAndView("redirect:/rejestracja");
     }

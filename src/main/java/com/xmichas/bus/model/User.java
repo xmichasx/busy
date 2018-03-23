@@ -19,6 +19,7 @@ public class User {
     private String haslo;
     private int iloscPunktow;
     private Stanowisko stanowisko= Stanowisko.KLIENT;
+    private boolean zalogowany=false;
 
     public Long getUserId() {
         return userId;
@@ -82,6 +83,14 @@ public class User {
 
     public void setStanowisko(Stanowisko stanowisko) {
         this.stanowisko = stanowisko;
+    }
+
+    public boolean isZalogowany() {
+        return zalogowany;
+    }
+
+    public void setZalogowany(boolean zalogowany) {
+        this.zalogowany = zalogowany;
     }
 
     public User(String imie, String nazwisko, String email, String login, String haslo, int iloscPunktow) {
