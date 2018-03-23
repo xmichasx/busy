@@ -83,4 +83,16 @@ public class User {
     public void setStanowisko(Stanowisko stanowisko) {
         this.stanowisko = stanowisko;
     }
+
+    public User(String imie, String nazwisko, String email, String login, String haslo, int iloscPunktow) {
+        this.imie = imie;
+        this.nazwisko = nazwisko;
+        this.email = email;
+        this.login = login;
+        this.haslo = haslo;
+        this.iloscPunktow = iloscPunktow;
+    }
+
+    public User() {
+    }
 }
